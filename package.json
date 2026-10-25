@@ -1,0 +1,15 @@
+{
+  "name": "nova",
+  "version": "1.0.0",
+  "description": "NOVA - The Pure-HTML Panic Button for Digital Overload",
+  "scripts": {
+    "dev": "npx serve .",
+    "build": "echo 'Static site - no build needed'"
+  },
+  "keywords": ["mental-health", "student-support", "static-site"],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@vercel/speed-insights": "^1.0.12"
+  }
+}
