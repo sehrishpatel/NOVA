@@ -1,2 +1,1342 @@
 # NOVA
   NOVA  The Pure-HTML Panic Button for Digital Overload. A zero-latency, distraction-free mental rehabilitation cockpit contained entirely inside one single static HTML file. With instant page switching and local data storage, it gives you a fast, private, offline space to clear your head and regain your focus.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Grandma's Hearth | Wise & Warm Student Mentorship</title>
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Google Fonts: Playfair Display (Serif header) & Plus Jakarta Sans (Body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            creamy: '#FFFBF2',
+            creamyDark: '#F4EAD5',
+            terracotta: '#C85A32',
+            terracottaHover: '#B04B26',
+            sage: '#3A5F43',
+            sageLight: '#EBF2ED',
+            warmWood: '#5C3A21',
+            warmSand: '#E6D9C5',
+            warmGold: '#D4A359'
+          },
+          fontFamily: {
+            serif: ['"Playfair Display"', 'serif'],
+            sans: ['"Plus Jakarta Sans"', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      background-color: #FFFBF2;
+      color: #382B22;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+    
+    .bg-cozy-pattern {
+      background-image: radial-gradient(#C85A32 0.75px, transparent 0.75px), radial-gradient(#3A5F43 0.75px, #FFFBF2 0.75px);
+      background-size: 30px 30px;
+      background-position: 0 0, 15px 15px;
+      background-opacity: 0.04;
+    }
+
+    /* Custom scrollbar for chat and stories */
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #F4EAD5;
+      border-radius: 8px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #C85A32;
+      border-radius: 8px;
+    }
+
+    .fade-in {
+      animation: fadeIn 0.4s ease-in-out forwards;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body class="min-h-screen bg-creamy flex flex-col justify-between relative selection:bg-terracotta selection:text-white">
+
+  <!-- TOP HEADER / NAVBAR -->
+  <header class="w-full bg-creamy/90 backdrop-blur-md border-b border-warmSand/60 sticky top-0 z-40 px-4 lg:px-8 py-3.5 transition-all">
+    <div class="max-w-7xl mx-auto flex items-center justify-between">
+      <div class="flex items-center gap-3 cursor-pointer" onclick="switchView('landing')">
+        <div class="w-10 h-10 rounded-full bg-terracotta/10 border border-terracotta/30 flex items-center justify-center text-terracotta text-xl shadow-sm">
+          <i class="fa-solid fa-fire-burner"></i>
+        </div>
+        <div>
+          <span class="font-serif text-xl font-bold text-warmWood tracking-tight block leading-none">Grandma's Hearth</span>
+          <span class="text-xs text-sage font-medium tracking-wide">A Gentle Safe Space to Grow</span>
+        </div>
+      </div>
+
+      <!-- Navigation Links -->
+      <nav id="nav-actions" class="flex items-center gap-3">
+        <button onclick="switchView('assessment')" id="btn-start-nav" class="bg-terracotta hover:bg-terracottaHover text-white text-sm font-semibold px-4 py-2 rounded-full shadow-md transition-all flex items-center gap-2">
+          <i class="fa-solid fa-mug-hot"></i>
+          <span>Sit by the Fire</span>
+        </button>
+        <button id="btn-dashboard-nav" onclick="switchView('dashboard')" class="hidden bg-sage hover:bg-sage/90 text-white text-sm font-semibold px-4 py-2 rounded-full shadow-md transition-all flex items-center gap-2">
+          <i class="fa-solid fa-compass"></i>
+          <span>My Hearth Space</span>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- MAIN CONTAINER -->
+  <main class="flex-grow max-w-7xl w-full mx-auto p-4 md:p-6 lg:p-8">
+
+    <!-- ================= VIEW 1: LANDING & WELCOME ================= -->
+    <section id="view-landing" class="fade-in py-6 lg:py-12">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+        <!-- Left Banner -->
+        <div class="lg:col-span-7 space-y-6">
+          <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-sage/10 text-sage border border-sage/20 text-xs font-semibold">
+            <i class="fa-solid fa-heart"></i>
+            <span>No judgment. No speed tests. Just warmth.</span>
+          </div>
+          <h1 class="font-serif text-4xl sm:text-5xl lg:text-6xl text-warmWood font-bold leading-tight">
+            Take off your shoes, dear. <br>
+            <span class="italic text-terracotta font-normal">Let's solve what troubles you.</span>
+          </h1>
+          <p class="text-stone-600 text-base sm:text-lg leading-relaxed max-w-2xl">
+            Grandma Clara has sailed stormy seas, ran cozy tea shops, and failed a hundred times before finding her peace. Whatever burden your studies or mind carry right now, we can unwrap it gently—together.
+          </p>
+
+          <div class="pt-2 flex flex-wrap gap-4 items-center">
+            <button onclick="switchView('assessment')" class="bg-terracotta hover:bg-terracottaHover text-white font-semibold text-base px-7 py-3.5 rounded-2xl shadow-lg hover:shadow-xl transition-all flex items-center gap-3 transform hover:-translate-y-0.5">
+              <span>Begin Reflection Quiz</span>
+              <i class="fa-solid fa-arrow-right text-sm"></i>
+            </button>
+            <div class="flex items-center gap-2 text-xs text-stone-500 font-medium">
+              <i class="fa-solid fa-shield-heart text-sage text-base"></i>
+              <span>Takes ~3 minutes • 7 gentle questions</span>
+            </div>
+          </div>
+
+          <!-- Quick Quote Card -->
+          <div class="mt-8 p-5 bg-creamyDark/50 border border-warmSand rounded-2xl flex items-start gap-4">
+            <div class="w-12 h-12 rounded-full bg-warmGold/20 flex-shrink-0 flex items-center justify-center text-warmWood text-xl font-serif font-bold border border-warmGold/30">
+              GC
+            </div>
+            <div>
+              <p class="text-sm italic text-stone-700 font-serif leading-relaxed">
+                "You aren't broken just because the mountain feels steep today. Sometimes your boots are simply filled with small pebbles you forgot to shake out."
+              </p>
+              <span class="text-xs font-bold text-terracotta uppercase tracking-wider block mt-1.5">— Grandma Clara</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Grandma Portrait Card -->
+        <div class="lg:col-span-5 flex justify-center">
+          <div class="relative w-full max-w-md bg-creamyDark p-6 rounded-3xl border border-warmSand shadow-xl text-center">
+            <div class="absolute -top-3 -right-3 bg-terracotta text-white w-10 h-10 rounded-full flex items-center justify-center shadow-md">
+              <i class="fa-solid fa-cookie-bite"></i>
+            </div>
+            
+            <div class="w-36 h-36 mx-auto mb-4 rounded-full bg-warmSand p-1 shadow-inner relative overflow-hidden flex items-center justify-center">
+              <svg viewBox="0 0 100 100" class="w-full h-full text-warmWood">
+                <circle cx="50" cy="50" r="48" fill="#E6D9C5"/>
+                <!-- Hair -->
+                <circle cx="50" cy="40" r="32" fill="#D4D4D4"/>
+                <circle cx="30" cy="38" r="12" fill="#C0C0C0"/>
+                <circle cx="70" cy="38" r="12" fill="#C0C0C0"/>
+                <circle cx="50" cy="22" r="10" fill="#E8E8E8"/>
+                <!-- Face -->
+                <circle cx="50" cy="48" r="24" fill="#F5D0C5"/>
+                <!-- Glasses -->
+                <circle cx="42" cy="46" r="7" fill="none" stroke="#5C3A21" stroke-width="2"/>
+                <circle cx="58" cy="46" r="7" fill="none" stroke="#5C3A21" stroke-width="2"/>
+                <line x1="49" y1="46" x2="51" y2="46" stroke="#5C3A21" stroke-width="2"/>
+                <!-- Eyes -->
+                <circle cx="42" cy="46" r="2" fill="#382B22"/>
+                <circle cx="58" cy="46" r="2" fill="#382B22"/>
+                <!-- Smile -->
+                <path d="M 44 56 Q 50 62 56 56" fill="none" stroke="#C85A32" stroke-width="2" stroke-linecap="round"/>
+                <!-- Cheeks -->
+                <circle cx="39" cy="52" r="3" fill="#E5989B" opacity="0.6"/>
+                <circle cx="61" cy="52" r="3" fill="#E5989B" opacity="0.6"/>
+                <!-- Cozy Sweater -->
+                <path d="M 20 90 Q 50 70 80 90 L 80 100 L 20 100 Z" fill="#3A5F43"/>
+                <path d="M 38 77 L 50 88 L 62 77" fill="none" stroke="#D4A359" stroke-width="2"/>
+              </svg>
+            </div>
+
+            <h3 class="font-serif text-2xl font-bold text-warmWood">Grandma Clara</h3>
+            <p class="text-xs text-sage font-semibold uppercase tracking-widest mt-0.5">Your Mentor & Safe Harbor</p>
+            <p class="text-xs text-stone-600 mt-3 leading-relaxed">
+              "I've kept tea hot and blanket ready for you. Let's talk about what's making your heart feel heavy today."
+            </p>
+
+            <!-- Feature Pills -->
+            <div class="mt-6 grid grid-cols-2 gap-2 text-left">
+              <div class="bg-creamy p-2.5 rounded-xl border border-warmSand/70 flex items-center gap-2">
+                <i class="fa-solid fa-compass text-terracotta"></i>
+                <span class="text-xs font-semibold text-stone-700">Root Cause Discovery</span>
+              </div>
+              <div class="bg-creamy p-2.5 rounded-xl border border-warmSand/70 flex items-center gap-2">
+                <i class="fa-solid fa-book-open-reader text-sage"></i>
+                <span class="text-xs font-semibold text-stone-700">Fireside Parables</span>
+              </div>
+              <div class="bg-creamy p-2.5 rounded-xl border border-warmSand/70 flex items-center gap-2">
+                <i class="fa-solid fa-comments text-warmGold"></i>
+                <span class="text-xs font-semibold text-stone-700">Warm AI Mentorship</span>
+              </div>
+              <div class="bg-creamy p-2.5 rounded-xl border border-warmSand/70 flex items-center gap-2">
+                <i class="fa-solid fa-seedling text-terracotta"></i>
+                <span class="text-xs font-semibold text-stone-700">Micro-Habits</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ================= VIEW 2: REGISTRATION & 7-QUESTION ASSESSMENT ================= -->
+    <section id="view-assessment" class="hidden fade-in max-w-3xl mx-auto py-4">
+      <!-- Progress Header -->
+      <div class="mb-6 bg-creamyDark/60 p-4 rounded-2xl border border-warmSand flex flex-wrap items-center justify-between gap-3">
+        <div class="flex items-center gap-3">
+          <div class="w-8 h-8 rounded-full bg-terracotta text-white flex items-center justify-center font-bold text-sm">
+            <span id="step-number">1</span>
+          </div>
+          <div>
+            <h2 id="step-title" class="font-serif font-bold text-warmWood text-lg">Welcome to Grandma's Porch</h2>
+            <p id="step-subtitle" class="text-xs text-stone-600">Let's get acquainted first, dear.</p>
+          </div>
+        </div>
+        <!-- Progress Bar -->
+        <div class="w-full sm:w-48 bg-warmSand rounded-full h-2.5 overflow-hidden">
+          <div id="progress-bar-fill" class="bg-terracotta h-2.5 rounded-full transition-all duration-300" style="width: 12%;"></div>
+        </div>
+      </div>
+
+      <!-- FORM CARD CONTAINER -->
+      <div class="bg-white/80 backdrop-blur-sm p-6 sm:p-8 rounded-3xl border border-warmSand shadow-xl relative">
+        
+        <!-- STEP 0: MINI REGISTRATION -->
+        <div id="wizard-step-0" class="space-y-6">
+          <div class="text-center max-w-md mx-auto">
+            <div class="w-16 h-16 bg-sage/10 text-sage rounded-full flex items-center justify-center mx-auto text-2xl mb-3 border border-sage/20">
+              <i class="fa-solid fa-[#5C3A21] fa-user-gear"></i>
+              <i class="fa-solid fa-hands-holding-circle"></i>
+            </div>
+            <h3 class="font-serif text-2xl font-bold text-warmWood">First, what may I call you?</h3>
+            <p class="text-stone-600 text-sm mt-1">Grandma loves to know who she is brewing tea for.</p>
+          </div>
+
+          <div class="space-y-4 max-w-md mx-auto">
+            <div>
+              <label class="block text-xs font-bold text-warmWood uppercase tracking-wider mb-2">Preferred Name</label>
+              <input type="text" id="reg-name" placeholder="e.g. Alex, Maya, Leo" class="w-full px-4 py-3 rounded-xl border border-warmSand bg-creamy/50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-terracotta/50 text-warmWood font-medium">
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold text-warmWood uppercase tracking-wider mb-2">Your Age Group</label>
+              <div class="grid grid-cols-2 gap-3">
+                <button type="button" onclick="selectAgeGroup(this, 'Pre-teen / Kid')" class="age-btn p-3 rounded-xl border border-warmSand text-left text-xs font-semibold hover:border-terracotta transition-all text-warmWood bg-creamy/40">
+                  <div class="font-bold text-sm">Under 13</div>
+                  <div class="text-stone-500 font-normal">Kids / Pre-teen</div>
+                </button>
+                <button type="button" onclick="selectAgeGroup(this, 'Teen (13-17)')" class="age-btn p-3 rounded-xl border border-warmSand text-left text-xs font-semibold hover:border-terracotta transition-all text-warmWood bg-creamy/40">
+                  <div class="font-bold text-sm">13 – 17</div>
+                  <div class="text-stone-500 font-normal">Teenager</div>
+                </button>
+                <button type="button" onclick="selectAgeGroup(this, 'Young Adult (18-25)')" class="age-btn p-3 rounded-xl border border-warmSand text-left text-xs font-semibold hover:border-terracotta transition-all text-warmWood bg-creamy/40">
+                  <div class="font-bold text-sm">18 – 25</div>
+                  <div class="text-stone-500 font-normal">College / Young Adult</div>
+                </button>
+                <button type="button" onclick="selectAgeGroup(this, 'Adult (25+)')" class="age-btn p-3 rounded-xl border border-warmSand text-left text-xs font-semibold hover:border-terracotta transition-all text-warmWood bg-creamy/40">
+                  <div class="font-bold text-sm">25+</div>
+                  <div class="text-stone-500 font-normal">Lifelong Student</div>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- DYNAMIC MANDATORY QUESTIONS 1 to 7 -->
+        <div id="wizard-questions-container" class="hidden">
+          <!-- Populated by JS -->
+        </div>
+
+        <!-- OPTIONAL WRITTEN QUESTION (STEP 8) -->
+        <div id="wizard-step-optional" class="hidden space-y-4">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full bg-warmGold/20 text-warmWood flex items-center justify-center font-bold">
+              <i class="fa-solid fa-pen-feather"></i>
+            </div>
+            <div>
+              <span class="text-xs font-bold text-terracotta uppercase tracking-wider">Optional Warm Letter</span>
+              <h3 class="font-serif text-xl font-bold text-warmWood">Is there anything specific weighing on your heart today?</h3>
+            </div>
+          </div>
+          <p class="text-stone-600 text-sm">
+            You don't have to carry it all inside. Write as little or as much as you wish in brief. Grandma reads every word.
+          </p>
+          <textarea id="optional-text" rows="4" placeholder="e.g. I have a huge exam coming up and I feel like I'm not good enough compared to others..." class="w-full p-4 rounded-2xl border border-warmSand bg-creamy/30 focus:bg-white focus:outline-none focus:ring-2 focus:ring-terracotta/50 text-stone-800 text-sm leading-relaxed"></textarea>
+        </div>
+
+        <!-- NAVIGATION BUTTONS -->
+        <div class="mt-8 pt-4 border-t border-warmSand/60 flex items-center justify-between">
+          <button id="btn-wizard-prev" onclick="wizardPrev()" class="hidden px-5 py-2.5 rounded-xl border border-warmSand text-warmWood font-semibold text-sm hover:bg-creamyDark transition-all">
+            <i class="fa-solid fa-chevron-left mr-1"></i> Back
+          </button>
+          <div class="ml-auto flex items-center gap-3">
+            <button id="btn-wizard-next" onclick="wizardNext()" class="bg-terracotta hover:bg-terracottaHover text-white font-semibold text-sm px-6 py-2.5 rounded-xl shadow-md transition-all flex items-center gap-2">
+              <span>Continue</span>
+              <i class="fa-solid fa-chevron-right text-xs"></i>
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ================= VIEW 3: PERSONALIZED DASHBOARD ================= -->
+    <section id="view-dashboard" class="hidden fade-in space-y-8">
+      
+      <!-- WELCOME HERO BANNER -->
+      <div class="relative bg-gradient-to-r from-warmWood via-warmWood/90 to-sage text-creamy p-6 sm:p-8 rounded-3xl shadow-xl overflow-hidden border border-warmSand/30">
+        <div class="absolute -right-10 -bottom-10 opacity-10 text-9xl text-white pointer-events-none">
+          <i class="fa-solid fa-fire-burner"></i>
+        </div>
+
+        <div class="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+          <div class="space-y-2 max-w-2xl">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 text-warmGold text-xs font-semibold backdrop-blur-sm border border-white/10">
+              <i class="fa-solid fa-heart-pulse"></i>
+              <span>Reflected & Analyzed by Grandma Clara</span>
+            </div>
+            <h1 class="font-serif text-3xl sm:text-4xl font-bold tracking-tight">
+              Welcome to the Hearth, <span id="dash-user-name" class="text-warmGold italic">Dear Student</span>
+            </h1>
+            <p id="dash-welcome-text" class="text-stone-200 text-sm sm:text-base leading-relaxed">
+              Grandma has looked closely at your answers. Take a deep breath, drop your shoulders, and let us look at your journey together.
+            </p>
+          </div>
+
+          <div class="bg-creamy/10 backdrop-blur-md border border-white/20 p-4 rounded-2xl flex items-center gap-4 text-white">
+            <div class="text-center">
+              <div class="text-xs text-stone-300 uppercase font-semibold">Age Bracket</div>
+              <div id="dash-age-group" class="font-serif text-base font-bold text-warmGold">Young Adult</div>
+            </div>
+            <div class="h-8 w-[1px] bg-white/20"></div>
+            <button onclick="switchView('assessment')" class="text-xs font-semibold bg-terracotta hover:bg-terracottaHover text-white px-3.5 py-2 rounded-xl transition-all shadow">
+              Retake Reflection
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ROOT CAUSE ANALYSIS & METERS GRID -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        
+        <!-- Left 7 Cols: Root Cause Insight Box -->
+        <div class="lg:col-span-7 bg-white/80 backdrop-blur-sm p-6 sm:p-7 rounded-3xl border border-warmSand shadow-md flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <div class="flex items-center gap-2 text-terracotta font-serif font-bold text-lg">
+                <i class="fa-solid fa-magnifying-glass-chart"></i>
+                <h3>Grandma's Root Cause Analysis</h3>
+              </div>
+              <span class="text-xs px-2.5 py-1 rounded-md bg-sage/10 text-sage font-semibold">Gentle Diagnosis</span>
+            </div>
+            
+            <p id="rc-summary-headline" class="font-serif text-xl font-semibold text-warmWood mb-3 leading-snug">
+              Loading root cause evaluation...
+            </p>
+            <p id="rc-summary-body" class="text-stone-600 text-sm leading-relaxed mb-6">
+              Analyzing your pattern of stress, emotional weight, and reaction to challenge...
+            </p>
+
+            <!-- Key Pain Point Identified -->
+            <div class="bg-creamy border-l-4 border-terracotta p-4 rounded-r-2xl space-y-1">
+              <span class="text-xs font-bold uppercase tracking-wider text-terracotta">Primary Core Friction</span>
+              <p id="rc-core-friction" class="text-xs sm:text-sm font-semibold text-warmWood">
+                High perfectionistic expectation combined with fatigue.
+              </p>
+            </div>
+          </div>
+
+          <!-- Gentle Action Approach -->
+          <div class="mt-6 pt-5 border-t border-warmSand/60">
+            <h4 class="text-xs font-bold text-sage uppercase tracking-wider mb-2">The Wise Grandma Approach</h4>
+            <p id="rc-action-approach" class="text-xs sm:text-sm text-stone-700 leading-relaxed font-medium">
+              We need to shift from "proving yourself" to "nourishing yourself."
+            </p>
+          </div>
+        </div>
+
+        <!-- Right 5 Cols: Visual Well-being Meters -->
+        <div class="lg:col-span-5 bg-creamyDark/50 p-6 rounded-3xl border border-warmSand shadow-md space-y-5 flex flex-col justify-between">
+          <div class="flex items-center justify-between">
+            <h3 class="font-serif font-bold text-warmWood text-lg">Inner State Gauge</h3>
+            <i class="fa-solid fa-sliders text-terracotta"></i>
+          </div>
+
+          <!-- Gauge 1: Stress & Weight -->
+          <div class="space-y-1.5">
+            <div class="flex justify-between text-xs font-bold text-warmWood">
+              <span>Current Stress Load</span>
+              <span id="meter-stress-val">Moderate</span>
+            </div>
+            <div class="w-full bg-warmSand rounded-full h-3 overflow-hidden p-0.5 border border-warmSand">
+              <div id="meter-stress-bar" class="bg-terracotta h-full rounded-full transition-all duration-700" style="width: 50%;"></div>
+            </div>
+          </div>
+
+          <!-- Gauge 2: Self-Compassion Index -->
+          <div class="space-y-1.5">
+            <div class="flex justify-between text-xs font-bold text-warmWood">
+              <span>Self-Compassion Index</span>
+              <span id="meter-compassion-val">Needs Care</span>
+            </div>
+            <div class="w-full bg-warmSand rounded-full h-3 overflow-hidden p-0.5 border border-warmSand">
+              <div id="meter-compassion-bar" class="bg-warmGold h-full rounded-full transition-all duration-700" style="width: 40%;"></div>
+            </div>
+          </div>
+
+          <!-- Gauge 3: Focus & Battery -->
+          <div class="space-y-1.5">
+            <div class="flex justify-between text-xs font-bold text-warmWood">
+              <span>Mental Energy Tank</span>
+              <span id="meter-energy-val">35% Remaining</span>
+            </div>
+            <div class="w-full bg-warmSand rounded-full h-3 overflow-hidden p-0.5 border border-warmSand">
+              <div id="meter-energy-bar" class="bg-sage h-full rounded-full transition-all duration-700" style="width: 35%;"></div>
+            </div>
+          </div>
+
+          <!-- Gauge 4: Support Openness -->
+          <div class="space-y-1.5">
+            <div class="flex justify-between text-xs font-bold text-warmWood">
+              <span>Willingness to Seek Help</span>
+              <span id="meter-help-val">Open</span>
+            </div>
+            <div class="w-full bg-warmSand rounded-full h-3 overflow-hidden p-0.5 border border-warmSand">
+              <div id="meter-help-bar" class="bg-warmWood h-full rounded-full transition-all duration-700" style="width: 70%;"></div>
+            </div>
+          </div>
+
+          <div class="text-[11px] text-stone-500 italic text-center pt-2">
+            "These metrics are not scores to beat, but weather reports of your heart."
+          </div>
+        </div>
+
+      </div>
+
+      <!-- MICRO-HABITS / DAILY STEPS -->
+      <div class="bg-white/80 p-6 rounded-3xl border border-warmSand shadow-md">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="w-9 h-9 rounded-full bg-sage/10 text-sage flex items-center justify-center font-bold">
+            <i class="fa-solid fa-seedling"></i>
+          </div>
+          <div>
+            <h3 class="font-serif text-lg font-bold text-warmWood">Grandma's 3 Micro-Habits for You</h3>
+            <p class="text-xs text-stone-600">Tiny steps designed to gently rebalance your daily routine.</p>
+          </div>
+        </div>
+
+        <div id="habits-list-container" class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <!-- JS dynamic habits -->
+        </div>
+      </div>
+
+      <!-- GRANDMA'S FIRESIDE STORIES (DYNAMIC BASED ON QUESTIONS) -->
+      <div class="space-y-4">
+        <div class="flex items-center justify-between">
+          <div>
+            <span class="text-xs font-bold text-terracotta uppercase tracking-wider">Lessons from a Wild, Cozy Life</span>
+            <h2 class="font-serif text-2xl font-bold text-warmWood">Grandma's Fireside Stories</h2>
+          </div>
+          <span class="text-xs text-stone-500 hidden sm:inline"><i class="fa-solid fa-book-sparkles mr-1"></i> Tailored to your responses</span>
+        </div>
+
+        <div id="stories-grid-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <!-- Dynamic Story Cards Populated by JS -->
+        </div>
+      </div>
+
+      <!-- TALK TO GRANDMA - LIVE INTERACTIVE CHAT & AFFIRMATION -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+        
+        <!-- Left 8 Cols: Interactive Chat -->
+        <div class="lg:col-span-8 bg-white/90 rounded-3xl border border-warmSand shadow-lg flex flex-col h-[560px] overflow-hidden">
+          <!-- Chat Header -->
+          <div class="p-4 bg-creamyDark/80 border-b border-warmSand flex items-center justify-between">
+            <div class="flex items-center gap-3">
+              <div class="relative">
+                <div class="w-10 h-10 rounded-full bg-terracotta/20 flex items-center justify-center font-serif text-warmWood font-bold border border-terracotta/30">
+                  GC
+                </div>
+                <span class="w-3 h-3 bg-sage rounded-full absolute bottom-0 right-0 border-2 border-white"></span>
+              </div>
+              <div>
+                <h4 class="font-serif font-bold text-warmWood text-base leading-tight">Grandma Clara</h4>
+                <p class="text-xs text-sage font-medium">Sitting by the fireplace • Always listening</p>
+              </div>
+            </div>
+
+            <!-- Clear Chat -->
+            <button onclick="clearChatHistory()" class="text-xs text-stone-500 hover:text-terracotta transition-all px-2 py-1 rounded-md hover:bg-white">
+              <i class="fa-solid fa-rotate-right mr-1"></i> Reset Conversation
+            </button>
+          </div>
+
+          <!-- Quick Topic Prompts -->
+          <div class="px-4 py-2.5 bg-creamy/60 border-b border-warmSand/50 flex items-center gap-2 overflow-x-auto text-xs whitespace-nowrap">
+            <span class="text-stone-500 font-bold flex-shrink-0">Ask Clara:</span>
+            <button onclick="sendQuickPrompt('Grandma, I\'m feeling overwhelmed today.')" class="px-3 py-1 bg-white hover:bg-terracotta hover:text-white border border-warmSand rounded-full transition-all text-warmWood">
+              "I'm feeling overwhelmed..."
+            </button>
+            <button onclick="sendQuickPrompt('How do I deal with fear of failing my exam or task?')" class="px-3 py-1 bg-white hover:bg-terracotta hover:text-white border border-warmSand rounded-full transition-all text-warmWood">
+              "How to deal with fear of failure?"
+            </button>
+            <button onclick="sendQuickPrompt('I cannot focus on studying and I keep procrastinating.')" class="px-3 py-1 bg-white hover:bg-terracotta hover:text-white border border-warmSand rounded-full transition-all text-warmWood">
+              "I can't seem to focus..."
+            </button>
+            <button onclick="sendQuickPrompt('Tell me an encouraging story from your travels.')" class="px-3 py-1 bg-white hover:bg-terracotta hover:text-white border border-warmSand rounded-full transition-all text-warmWood">
+              "Tell me an adventure story"
+            </button>
+          </div>
+
+          <!-- Chat Messages Area -->
+          <div id="chat-messages" class="flex-grow p-4 overflow-y-auto space-y-4 bg-creamy/20">
+            <!-- Messages added dynamically -->
+          </div>
+
+          <!-- Chat Input -->
+          <form id="chat-form" onsubmit="handleChatSubmit(event)" class="p-3 bg-creamyDark/40 border-t border-warmSand flex gap-2 items-center">
+            <input type="text" id="chat-input" placeholder="Type your heart out to Grandma..." class="flex-grow px-4 py-2.5 text-sm rounded-xl border border-warmSand bg-white focus:outline-none focus:ring-2 focus:ring-terracotta/40 text-warmWood">
+            <button type="submit" class="bg-terracotta hover:bg-terracottaHover text-white px-5 py-2.5 rounded-xl text-sm font-semibold transition-all flex items-center gap-1.5 shadow">
+              <span>Send</span>
+              <i class="fa-solid fa-paper-plane text-xs"></i>
+            </button>
+          </form>
+        </div>
+
+        <!-- Right 4 Cols: Affirmation Card & Tea Cup Ritual -->
+        <div class="lg:col-span-4 space-y-6">
+          
+          <!-- Daily Wisdom Card -->
+          <div class="bg-gradient-to-br from-creamyDark via-white to-creamy p-6 rounded-3xl border border-warmSand shadow-md relative overflow-hidden">
+            <div class="text-xs font-bold text-terracotta uppercase tracking-wider mb-2 flex items-center gap-1.5">
+              <i class="fa-solid fa-leaf"></i>
+              <span>Leaf of Daily Wisdom</span>
+            </div>
+            
+            <p id="wisdom-text" class="font-serif italic text-warmWood text-lg leading-relaxed mb-4">
+              "A cup of tea cannot be filled if it is already brim-full. Empty your mind of yesterday's stumbles so today has room to breathe."
+            </p>
+
+            <div class="flex items-center justify-between pt-3 border-t border-warmSand/60">
+              <span class="text-xs text-stone-500">— Grandma Clara</span>
+              <button onclick="pullNewWisdom()" class="text-xs font-semibold bg-sage text-white px-3 py-1.5 rounded-lg hover:bg-sage/90 transition-all flex items-center gap-1">
+                <i class="fa-solid fa-arrows-rotate"></i>
+                <span>New Leaf</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Tea Breathing Ritual Mini-Widget -->
+          <div class="bg-white/80 p-5 rounded-3xl border border-warmSand shadow-md text-center space-y-3">
+            <div class="w-12 h-12 bg-terracotta/10 text-terracotta rounded-full flex items-center justify-center mx-auto text-xl">
+              <i class="fa-solid fa-mug-hot"></i>
+            </div>
+            <h4 class="font-serif font-bold text-warmWood text-base">Grandma's 1-Minute Tea Breath</h4>
+            <p class="text-xs text-stone-600 leading-relaxed">
+              Inhale the warm steam (4s), hold the warmth (4s), blow to cool the tea gently (6s).
+            </p>
+            <button id="btn-tea-timer" onclick="startTeaBreathing()" class="w-full py-2 bg-creamyDark hover:bg-warmSand text-warmWood text-xs font-bold rounded-xl border border-warmSand transition-all">
+              Start Gentle Breath Exercise
+            </button>
+            <div id="tea-timer-display" class="hidden text-sm font-serif font-bold text-terracotta animate-pulse">
+              Inhale... 4
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="mt-12 bg-creamyDark border-t border-warmSand/70 py-6 text-center text-xs text-stone-600">
+    <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-3">
+      <div class="flex items-center gap-2">
+        <i class="fa-solid fa-heart text-terracotta"></i>
+        <span class="font-serif font-semibold text-warmWood">Grandma's Hearth Mentorship</span>
+      </div>
+      <p>Created with warmth for students worldwide. You are doing much better than you think.</p>
+    </div>
+  </footer>
+
+
+  <!-- STORY MODAL DIALOG -->
+  <div id="story-modal" class="fixed inset-0 bg-warmWood/50 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-creamy max-w-2xl w-full rounded-3xl p-6 sm:p-8 border border-warmSand shadow-2xl relative max-h-[90vh] overflow-y-auto fade-in">
+      <button onclick="closeStoryModal()" class="absolute top-5 right-5 w-8 h-8 bg-warmSand/60 hover:bg-warmSand text-warmWood rounded-full flex items-center justify-center font-bold transition-all">
+        ✕
+      </button>
+
+      <span id="modal-story-category" class="text-xs font-bold text-terracotta uppercase tracking-wider block mb-1">
+        Fireside Adventure
+      </span>
+      <h2 id="modal-story-title" class="font-serif text-2xl sm:text-3xl font-bold text-warmWood mb-4">
+        Story Title
+      </h2>
+
+      <div class="w-full h-48 rounded-2xl bg-warmSand mb-5 overflow-hidden relative flex items-center justify-center text-warmWood">
+        <i id="modal-story-icon" class="fa-solid fa-compass text-6xl opacity-30"></i>
+        <div id="modal-story-location" class="absolute bottom-3 left-4 bg-warmWood/80 text-white text-xs px-3 py-1 rounded-full backdrop-blur-sm">
+          Kyoto, 1984
+        </div>
+      </div>
+
+      <div id="modal-story-body" class="text-stone-700 text-sm sm:text-base leading-relaxed space-y-4 font-serif">
+        <!-- Story paragraphs inserted dynamically -->
+      </div>
+
+      <div class="mt-6 pt-4 border-t border-warmSand flex justify-between items-center">
+        <span class="text-xs text-sage font-bold italic">"Take this lesson in your pocket today."</span>
+        <button onclick="closeStoryModal()" class="bg-terracotta text-white font-semibold text-xs px-5 py-2.5 rounded-xl shadow hover:bg-terracottaHover transition-all">
+          Close Story
+        </button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ================= JAVASCRIPT STATE & LOGIC ================= -->
+  <script>
+    /* GLOBAL STATE */
+    let studentData = {
+      name: '',
+      ageGroup: '',
+      answers: {},
+      optionalNote: ''
+    };
+
+    let currentWizardStep = 0; // 0 = Reg, 1-7 = Mandatory Qs, 8 = Optional
+
+    /* 7 MANDATORY QUESTIONS DEFINITION */
+    const mandatoryQuestions = [
+      {
+        id: 1,
+        title: "How are you carrying the weight of your days lately?",
+        subtitle: "Reflecting on your daily mental energy and emotional weight",
+        icon: "fa-feather-pointed",
+        options: [
+          { text: "Light and steady — I feel balanced.", score: "low_stress" },
+          { text: "A bit heavy — constant small worries accumulating.", score: "med_stress" },
+          { text: "Very heavy — like carrying a heavy rucksack uphill.", score: "high_stress" },
+          { text: "Exhausted — I'm pushing through pure willpower.", score: "burnout" }
+        ]
+      },
+      {
+        id: 2,
+        title: "When you face a tough problem or subject, what happens inside your mind first?",
+        subtitle: "Unpacking your initial reaction to difficulty",
+        icon: "fa-brain",
+        options: [
+          { text: "Curiosity — 'Let me break this down step by step.'", score: "growth" },
+          { text: "Anxiety — 'What if I fail or prove I'm not smart enough?'", score: "fear_failure" },
+          { text: "Avoidance — 'I'll put this off until later.'", score: "procrastination" },
+          { text: "Overwhelm — my brain freezes and shuts down.", score: "overwhelm" }
+        ]
+      },
+      {
+        id: 3,
+        title: "What does your inner voice sound like when things don't go according to plan?",
+        subtitle: "Measuring your level of self-compassion vs self-criticism",
+        icon: "fa-comments",
+        options: [
+          { text: "Gentle & encouraging — 'It's okay, mistakes are part of learning.'", score: "high_compassion" },
+          { text: "Strict — 'You should have worked harder or known better.'", score: "harsh_critic" },
+          { text: "Disappointed — 'You always end up falling short.'", score: "self_doubt" },
+          { text: "Numb — I just try not to feel much about it.", score: "numb" }
+        ]
+      },
+      {
+        id: 4,
+        title: "How is your sleep and peace of mind when school/work builds up?",
+        subtitle: "Understanding your rest quality and stress somatic response",
+        icon: "fa-bed",
+        options: [
+          { text: "Restful — I rest well despite the workload.", score: "good_rest" },
+          { text: "Restless — my mind races with to-do lists at night.", score: "racing_mind" },
+          { text: "Disrupted — poor sleep, waking up feeling tired.", score: "poor_sleep" },
+          { text: "Dread — waking up with a heavy heart for the day ahead.", score: "dread" }
+        ]
+      },
+      {
+        id: 5,
+        title: "What usually drains your battery the fastest during the week?",
+        subtitle: "Pinpointing your largest friction point",
+        icon: "fa-battery-quarter",
+        options: [
+          { text: "Comparing myself to others who seem to have it all together.", score: "comparison" },
+          { text: "Endless perfectionism — never feeling satisfied with my output.", score: "perfectionism" },
+          { text: "Lack of clarity or disorganized study habits.", score: "disorganization" },
+          { text: "Feeling isolated or disconnected from people who understand me.", score: "isolation" }
+        ]
+      },
+      {
+        id: 6,
+        title: "When was the last time you felt truly proud of a small step you took?",
+        subtitle: "Acknowledging your ability to celebrate progress",
+        icon: "fa-trophy",
+        options: [
+          { text: "Recently — I celebrate small wins often!", score: "celebrates_wins" },
+          { text: "Hardly ever — I quickly skip to the next goal.", score: "ignores_wins" },
+          { text: "Only when I get external praise or high grades.", score: "external_validation" },
+          { text: "I can't remember the last time.", score: "low_self_worth" }
+        ]
+      },
+      {
+        id: 7,
+        title: "How easy or hard is it for you to ask for help when you're overwhelmed?",
+        subtitle: "Evaluating openness to support systems",
+        icon: "fa-hand-holding-hand",
+        options: [
+          { text: "Easy — I readily reach out to friends, teachers, or family.", score: "open_help" },
+          { text: "Difficult — I prefer to suffer in silence until it's critical.", score: "silent_struggle" },
+          { text: "Hard — I feel like asking for help makes me a burden.", score: "burden_fear" },
+          { text: "Impossible — I feel no one can really help anyway.", score: "isolated_mind" }
+        ]
+      }
+    ];
+
+    /* GRANDMA'S FIRESIDE STORIES DATABASE */
+    const storyDatabase = {
+      fear_failure: {
+        title: "The Alps & The Misplaced Footing",
+        category: "Overcoming Fear of Failure",
+        location: "Swiss Alps, 1978",
+        icon: "fa-mountain-sun",
+        body: [
+          "When I was twenty-two, I set out to scale the North face of a treacherous pass in the Alps. Halfway up, a gust of wind knocked off my map, and my knees trembled so hard I couldn't step up.",
+          "An old guide named Hans stopped beside me. He didn't tell me to be brave. He simply said: 'Clara, you don't look at the mountain peak when the wind blows. You look at the six inches of rock right in front of your toes.'",
+          "Dear one, when fear of failing a subject or task strikes, do not stare at the towering summit. Focus only on the small six inches in front of your hands today."
+        ]
+      },
+      perfectionism: {
+        title: "The Cracked Teacup in Kyoto",
+        category: "Embracing Imperfection",
+        location: "Kyoto, Japan, 1986",
+        icon: "fa-mug-saucer",
+        body: [
+          "I ran a modest tea garden in Kyoto for two winters. I remember crying over dropping a handmade porcelain bowl that had taken months to carve.",
+          "An elderly craftsman picked up the shattered pieces, fused them back together with lacquer dusted in real gold dust—a practice called Kintsugi.",
+          "He handed it to me and said, 'Now it is far more beautiful than when it was flawless. Its story is visible.' Your small flaws and mistakes do not ruin your worth, dear—they dust your journey with gold."
+        ]
+      },
+      burnout: {
+        title: "The Sailboat in the Calm Ocean",
+        category: "Rest & Renewal",
+        location: "South Pacific, 1991",
+        icon: "fa-sailboat",
+        body: [
+          "While sailing across the Pacific Ocean, our sailboat lost all wind for four whole days. I panicked, rowing furiously with small oars until my palms bled.",
+          "The captain gently pulled the oars from my burning hands. 'Clara,' he smiled, 'the ocean is resting. Why aren't you? Pushing against windless waters only drains your life energy.'",
+          "If you are burned out right now, stop trying to row against a windless sea. Rest your hands. The wind will blow again soon."
+        ]
+      },
+      comparison: {
+        title: "The Orchard of Two Trees",
+        category: "Self-Compassion & Pace",
+        location: "Provence, France, 1995",
+        icon: "fa-tree",
+        body: [
+          "In my garden in Provence, I planted an oak tree and a fig tree side by side. For three years, the fig tree produced sweet, plump fruits while the oak tree looked like a thin stick.",
+          "I almost pulled the oak out. But ten years later, that oak spread a vast canopy that sheltered the entire garden from scorching summer heats.",
+          "Never measure your timing by someone else's harvest. You are growing at the exact pace your roots need."
+        ]
+      },
+      general: {
+        title: "Lantern Light in the Midnight Storm",
+        category: "Courage in Uncertainty",
+        location: "Scottish Highlands, 2002",
+        icon: "fa-compass",
+        body: [
+          "Lost in a heavy mist in the Highlands, I could only see three steps ahead of my oil lantern. I was terrified of going nowhere.",
+          "I realized that lantern light doesn't reveal the whole road home—it only reveals the next step. And as long as you take step after step in lantern light, you will cross any wilderness.",
+          "You don't need to know how your entire future will unfold right now. Just step through the light you have today."
+        ]
+      }
+    };
+
+    /* WISDOM LEAVES */
+    const wisdomQuotes = [
+      "A cup of tea cannot be filled if it is already brim-full. Empty your mind of yesterday's stumbles so today has room to breathe.",
+      "You are allowed to be a work in progress and a masterpiece at the very same time.",
+      "The heaviest baggage we carry is often the expectation we placed on ourselves three years ago.",
+      "Resting is not giving up; it is oiling the lamp so it burns bright tomorrow.",
+      "Be as gentle with yourself as you would be with a little child learning to walk for the first time."
+    ];
+
+    /* INITIALIZATION */
+    window.onload = function() {
+      buildQuestionsHTML();
+    };
+
+    /* VIEW SWITCHER */
+    function switchView(viewName) {
+      document.getElementById('view-landing').classList.add('hidden');
+      document.getElementById('view-assessment').classList.add('hidden');
+      document.getElementById('view-dashboard').classList.add('hidden');
+
+      if (viewName === 'landing') {
+        document.getElementById('view-landing').classList.remove('hidden');
+      } else if (viewName === 'assessment') {
+        document.getElementById('view-assessment').classList.remove('hidden');
+      } else if (viewName === 'dashboard') {
+        if (!studentData.name) {
+          // If no assessment done yet, go to assessment first
+          switchView('assessment');
+          return;
+        }
+        document.getElementById('view-dashboard').classList.remove('hidden');
+      }
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    /* AGE SELECTION */
+    function selectAgeGroup(btn, ageGroup) {
+      document.querySelectorAll('.age-btn').forEach(b => {
+        b.classList.remove('border-terracotta', 'bg-terracotta/10', 'ring-2', 'ring-terracotta/40');
+      });
+      btn.classList.add('border-terracotta', 'bg-terracotta/10', 'ring-2', 'ring-terracotta/40');
+      studentData.ageGroup = ageGroup;
+    }
+
+    /* BUILD QUESTION HTML IN WIZARD */
+    function buildQuestionsHTML() {
+      const container = document.getElementById('wizard-questions-container');
+      container.innerHTML = '';
+
+      mandatoryQuestions.forEach((q, idx) => {
+        const qDiv = document.createElement('div');
+        qDiv.id = `wizard-step-${idx + 1}`;
+        qDiv.className = 'hidden space-y-6';
+
+        let optionsHTML = q.options.map((opt, oIdx) => `
+          <button type="button" onclick="selectQuestionOption(${q.id}, '${opt.score}', this)" 
+            class="q-opt-btn w-full p-4 rounded-2xl border border-warmSand text-left text-sm font-medium hover:border-terracotta hover:bg-creamyDark/50 transition-all flex items-center justify-between text-warmWood group bg-creamy/30">
+            <span>${opt.text}</span>
+            <div class="w-5 h-5 rounded-full border border-warmSand group-hover:border-terracotta flex items-center justify-center text-xs text-white check-icon">
+              <i class="fa-solid fa-check hidden"></i>
+            </div>
+          </button>
+        `).join('');
+
+        qDiv.innerHTML = `
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full bg-sage/10 text-sage flex items-center justify-center font-bold text-lg">
+              <i class="fa-solid ${q.icon}"></i>
+            </div>
+            <div>
+              <span class="text-xs font-bold text-terracotta uppercase tracking-wider">Question ${q.id} of 7</span>
+              <h3 class="font-serif text-xl sm:text-2xl font-bold text-warmWood leading-snug">${q.title}</h3>
+            </div>
+          </div>
+          <p class="text-xs text-stone-500 italic">${q.subtitle}</p>
+          <div class="space-y-3 pt-2">
+            ${optionsHTML}
+          </div>
+        `;
+        container.appendChild(qDiv);
+      });
+    }
+
+    /* SELECT OPTION IN QUESTION */
+    function selectQuestionOption(qId, scoreVal, btnElement) {
+      studentData.answers[qId] = scoreVal;
+      
+      const parentDiv = btnElement.closest('.space-y-3');
+      parentDiv.querySelectorAll('.q-opt-btn').forEach(b => {
+        b.classList.remove('border-terracotta', 'bg-terracotta/10', 'ring-2', 'ring-terracotta/30');
+        b.querySelector('.check-icon').classList.remove('bg-terracotta', 'border-terracotta');
+        b.querySelector('.check-icon i').classList.add('hidden');
+      });
+
+      btnElement.classList.add('border-terracotta', 'bg-terracotta/10', 'ring-2', 'ring-terracotta/30');
+      const checkIcon = btnElement.querySelector('.check-icon');
+      checkIcon.classList.add('bg-terracotta', 'border-terracotta');
+      checkIcon.querySelector('i').classList.remove('hidden');
+    }
+
+    /* WIZARD NEXT BUTTON */
+    function wizardNext() {
+      // Step 0 validation
+      if (currentWizardStep === 0) {
+        const nameInput = document.getElementById('reg-name').value.trim();
+        if (!nameInput) {
+          alert("Please tell Grandma your name so she knows who she is talking to!");
+          return;
+        }
+        if (!studentData.ageGroup) {
+          alert("Please select your age group, dear.");
+          return;
+        }
+        studentData.name = nameInput;
+      }
+
+      // Step 1-7 validation
+      if (currentWizardStep >= 1 && currentWizardStep <= 7) {
+        if (!studentData.answers[currentWizardStep]) {
+          alert("Please select the answer that fits your heart best before moving forward.");
+          return;
+        }
+      }
+
+      // Move forward
+      if (currentWizardStep < 8) {
+        currentWizardStep++;
+        updateWizardUI();
+      } else {
+        // Complete registration & generate dashboard
+        studentData.optionalNote = document.getElementById('optional-text').value.trim();
+        generateDashboard();
+      }
+    }
+
+    /* WIZARD PREV BUTTON */
+    function wizardPrev() {
+      if (currentWizardStep > 0) {
+        currentWizardStep--;
+        updateWizardUI();
+      }
+    }
+
+    /* UPDATE WIZARD UI DISPLAY */
+    function updateWizardUI() {
+      // Hide all steps
+      document.getElementById('wizard-step-0').classList.add('hidden');
+      document.getElementById('wizard-questions-container').classList.add('hidden');
+      for (let i = 1; i <= 7; i++) {
+        const stepEl = document.getElementById(`wizard-step-${i}`);
+        if (stepEl) stepEl.classList.add('hidden');
+      }
+      document.getElementById('wizard-step-optional').classList.add('hidden');
+
+      // Update Nav Buttons
+      const prevBtn = document.getElementById('btn-wizard-prev');
+      const nextBtn = document.getElementById('btn-wizard-next');
+
+      if (currentWizardStep === 0) {
+        prevBtn.classList.add('hidden');
+        document.getElementById('wizard-step-0').classList.remove('hidden');
+        document.getElementById('step-number').innerText = '1';
+        document.getElementById('step-title').innerText = "Welcome to Grandma's Porch";
+        document.getElementById('step-subtitle').innerText = "Let's get acquainted first, dear.";
+        document.getElementById('progress-bar-fill').style.width = '12%';
+      } else if (currentWizardStep >= 1 && currentWizardStep <= 7) {
+        prevBtn.classList.remove('hidden');
+        document.getElementById('wizard-questions-container').classList.remove('hidden');
+        document.getElementById(`wizard-step-${currentWizardStep}`).classList.remove('hidden');
+        document.getElementById('step-number').innerText = currentWizardStep + 1;
+        document.getElementById('step-title').innerText = `Reflective Question ${currentWizardStep} of 7`;
+        document.getElementById('step-subtitle').innerText = "Take your time. There are no wrong answers.";
+        
+        const pct = Math.round(((currentWizardStep + 1) / 9) * 100);
+        document.getElementById('progress-bar-fill').style.width = `${pct}%`;
+
+        if (currentWizardStep === 7) {
+          nextBtn.innerHTML = `<span>Final Touch</span> <i class="fa-solid fa-chevron-right text-xs"></i>`;
+        } else {
+          nextBtn.innerHTML = `<span>Continue</span> <i class="fa-solid fa-chevron-right text-xs"></i>`;
+        }
+      } else if (currentWizardStep === 8) {
+        prevBtn.classList.remove('hidden');
+        document.getElementById('wizard-step-optional').classList.remove('hidden');
+        document.getElementById('step-number').innerText = '8';
+        document.getElementById('step-title').innerText = 'Grandma\'s Open Mailbox';
+        document.getElementById('step-subtitle').innerText = 'Optional final note.';
+        document.getElementById('progress-bar-fill').style.width = '100%';
+        nextBtn.innerHTML = `<span>Open My Dashboard</span> <i class="fa-solid fa-sparkles text-xs"></i>`;
+      }
+    }
+
+
+    /* ================= GENERATE PERSONALIZED DASHBOARD ================= */
+    function generateDashboard() {
+      // 1. Update Name & Age
+      document.getElementById('dash-user-name').innerText = studentData.name;
+      document.getElementById('dash-age-group').innerText = studentData.ageGroup;
+      
+      // Update Navbar
+      document.getElementById('btn-dashboard-nav').classList.remove('hidden');
+
+      // 2. Perform Root Cause Analysis based on answers
+      analyzeRootCause();
+
+      // 3. Render Custom Stories based on answers
+      renderPersonalizedStories();
+
+      // 4. Initialize Interactive Chat with Grandma
+      initGrandmaChat();
+
+      // 5. Switch to Dashboard View
+      switchView('dashboard');
+    }
+
+    /* ROOT CAUSE ANALYSIS ALGORITHM */
+    function analyzeRootCause() {
+      const ans = studentData.answers;
+
+      let stressScore = 50; // default medium
+      let compassionScore = 50;
+      let energyScore = 50;
+      let helpScore = 50;
+
+      // Q1 Stress
+      if (ans[1] === 'low_stress') stressScore = 20;
+      if (ans[1] === 'med_stress') stressScore = 55;
+      if (ans[1] === 'high_stress') stressScore = 80;
+      if (ans[1] === 'burnout') stressScore = 95;
+
+      // Q3 Compassion
+      if (ans[3] === 'high_compassion') compassionScore = 90;
+      if (ans[3] === 'harsh_critic') compassionScore = 30;
+      if (ans[3] === 'self_doubt') compassionScore = 40;
+      if (ans[3] === 'numb') compassionScore = 25;
+
+      // Q4 Sleep / Energy
+      if (ans[4] === 'good_rest') energyScore = 85;
+      if (ans[4] === 'racing_mind') energyScore = 45;
+      if (ans[4] === 'poor_sleep') energyScore = 30;
+      if (ans[4] === 'dread') energyScore = 15;
+
+      // Q7 Help Openness
+      if (ans[7] === 'open_help') helpScore = 90;
+      if (ans[7] === 'silent_struggle') helpScore = 40;
+      if (ans[7] === 'burden_fear') helpScore = 30;
+      if (ans[7] === 'isolated_mind') helpScore = 15;
+
+      // UI Meters Update
+      document.getElementById('meter-stress-bar').style.width = `${stressScore}%`;
+      document.getElementById('meter-stress-val').innerText = stressScore > 75 ? "High / Heavy" : (stressScore > 45 ? "Moderate" : "Light & Balanced");
+
+      document.getElementById('meter-compassion-bar').style.width = `${compassionScore}%`;
+      document.getElementById('meter-compassion-val').innerText = compassionScore > 70 ? "Warm & Gentle" : (compassionScore > 40 ? "Needs Warmth" : "Harsh Self-Critic");
+
+      document.getElementById('meter-energy-bar').style.width = `${energyScore}%`;
+      document.getElementById('meter-energy-val').innerText = `${energyScore}% Rested`;
+
+      document.getElementById('meter-help-bar').style.width = `${helpScore}%`;
+      document.getElementById('meter-help-val').innerText = helpScore > 70 ? "Open to Guidance" : (helpScore > 35 ? "Hesitant" : "Guarded");
+
+      // Root Cause Synthesis
+      let headline = "";
+      let body = "";
+      let friction = "";
+      let approach = "";
+
+      if (ans[5] === 'perfectionism' || ans[2] === 'fear_failure') {
+        headline = "The Weight of Expecting Flawlessness";
+        body = `Dear ${studentData.name}, Grandma sees that your deepest strain comes from carrying an invisible standard of perfection. When things don't go smoothly, your mind treats it like a storm rather than just a falling leaf.`;
+        friction = "High internal standards causing cognitive tension and fear of stumbling.";
+        approach = "Practice 'Good-Enough Progress.' Give yourself permission to submit raw first drafts and make mistake-filled attempts without self-punishment.";
+      } else if (ans[5] === 'comparison' || ans[6] === 'external_validation') {
+        headline = "The Quiet Drain of Comparing Timelines";
+        body = `Grandma notices you are looking sideways at everyone else's garden while trying to water your own. Your battery gets drained because you are trying to match a pace that isn't yours.`;
+        friction = "Comparing internal doubts with other people's polished external successes.";
+        approach = "Put blinders on your garden path for one week. Measure your success only against where you stood last month, not where peers stand.";
+      } else if (ans[1] === 'burnout' || ans[4] === 'poor_sleep' || ans[4] === 'dread') {
+        headline = "An Overworked Engine Seeking Rest";
+        body = `Your mind and body are giving clear signals that your battery is running near empty. You cannot draw clear water from a dry well, dear ${studentData.name}.`;
+        friction = "Continuous mental output without adequate rest, leading to fatigue and dread.";
+        approach = "Mandatory zero-guilt rest windows. Treat sleep and rest as an essential study tool, not a luxury earned only after exhaustion.";
+      } else {
+        headline = "Navigating Overwhelm with Gentle Steps";
+        body = `You are facing a tangle of tasks and feelings, ${studentData.name}. It feels like a tangled ball of yarn right now, but every thread can be unwound one loop at a time.`;
+        friction = "Disorganized overwhelm and uncertainty on where to focus energy first.";
+        approach = "Unpack the yarn. Choose one small 10-minute task today and ignore the rest until that single thread is untangled.";
+      }
+
+      document.getElementById('rc-summary-headline').innerText = headline;
+      document.getElementById('rc-summary-body').innerText = body;
+      document.getElementById('rc-core-friction').innerText = friction;
+      document.getElementById('rc-action-approach').innerText = approach;
+
+      // Populate Micro Habits
+      const habitsContainer = document.getElementById('habits-list-container');
+      habitsContainer.innerHTML = `
+        <div class="bg-creamy/50 p-4 rounded-2xl border border-warmSand space-y-2">
+          <div class="flex items-center gap-2 text-terracotta font-bold text-xs uppercase">
+            <i class="fa-solid fa-mug-hot"></i> Habit 1: Warm Start
+          </div>
+          <p class="text-xs text-stone-700 leading-relaxed font-medium">
+            Spend 5 minutes each morning sitting with a warm drink before opening any study app or notification.
+          </p>
+        </div>
+        <div class="bg-creamy/50 p-4 rounded-2xl border border-warmSand space-y-2">
+          <div class="flex items-center gap-2 text-sage font-bold text-xs uppercase">
+            <i class="fa-solid fa-pen-nib"></i> Habit 2: Gentle Self-Talk
+          </div>
+          <p class="text-xs text-stone-700 leading-relaxed font-medium">
+            When you catch your inner voice criticizing, replace it with Grandma's phrase: <em>"I am learning, and learning takes time."</em>
+          </p>
+        </div>
+        <div class="bg-creamy/50 p-4 rounded-2xl border border-warmSand space-y-2">
+          <div class="flex items-center gap-2 text-warmGold font-bold text-xs uppercase">
+            <i class="fa-solid fa-hourglass-half"></i> Habit 3: The 15-Min Sprint
+          </div>
+          <p class="text-xs text-stone-700 leading-relaxed font-medium">
+            Stuck on a subject? Work for just 15 minutes with permission to stop when the timer rings.
+          </p>
+        </div>
+      `;
+    }
+
+    /* RENDER STORIES MATCHED TO ANSWERS */
+    function renderPersonalizedStories() {
+      const container = document.getElementById('stories-grid-container');
+      container.innerHTML = '';
+
+      let selectedKeys = [];
+      const ans = studentData.answers;
+
+      if (ans[2] === 'fear_failure' || ans[3] === 'self_doubt') selectedKeys.push('fear_failure');
+      if (ans[5] === 'perfectionism' || ans[3] === 'harsh_critic') selectedKeys.push('perfectionism');
+      if (ans[1] === 'burnout' || ans[4] === 'poor_sleep') selectedKeys.push('burnout');
+      if (ans[5] === 'comparison') selectedKeys.push('comparison');
+
+      // Ensure at least 3 stories
+      if (!selectedKeys.includes('general')) selectedKeys.push('general');
+      if (selectedKeys.length < 3) {
+        if (!selectedKeys.includes('perfectionism')) selectedKeys.push('perfectionism');
+        if (!selectedKeys.includes('fear_failure')) selectedKeys.push('fear_failure');
+      }
+
+      selectedKeys = [...new Set(selectedKeys)].slice(0, 3);
+
+      selectedKeys.forEach(key => {
+        const story = storyDatabase[key] || storyDatabase.general;
+
+        const card = document.createElement('div');
+        card.className = 'bg-white/80 p-5 rounded-3xl border border-warmSand shadow-md hover:shadow-xl transition-all flex flex-col justify-between group cursor-pointer';
+        card.onclick = () => openStoryModal(key);
+
+        card.innerHTML = `
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-[11px] font-bold text-terracotta bg-terracotta/10 px-2.5 py-1 rounded-full border border-terracotta/20">
+                ${story.category}
+              </span>
+              <span class="text-xs text-stone-500 font-medium"><i class="fa-solid fa-location-dot text-sage mr-1"></i>${story.location}</span>
+            </div>
+            <h3 class="font-serif text-lg font-bold text-warmWood group-hover:text-terracotta transition-colors mb-2">
+              ${story.title}
+            </h3>
+            <p class="text-xs text-stone-600 line-clamp-3 leading-relaxed italic">
+              "${story.body[0]}"
+            </p>
+          </div>
+
+          <div class="mt-4 pt-3 border-t border-warmSand/60 flex items-center justify-between text-xs font-bold text-sage">
+            <span>Read Grandma's Tale</span>
+            <i class="fa-solid fa-arrow-right transform group-hover:translate-x-1 transition-transform"></i>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    /* STORY MODAL OPEN / CLOSE */
+    function openStoryModal(storyKey) {
+      const story = storyDatabase[storyKey] || storyDatabase.general;
+      document.getElementById('modal-story-category').innerText = story.category;
+      document.getElementById('modal-story-title').innerText = story.title;
+      document.getElementById('modal-story-location').innerText = story.location;
+      document.getElementById('modal-story-icon').className = `fa-solid ${story.icon} text-6xl opacity-30`;
+
+      const bodyContainer = document.getElementById('modal-story-body');
+      bodyContainer.innerHTML = story.body.map(p => `<p class="leading-relaxed">${p}</p>`).join('');
+
+      document.getElementById('story-modal').classList.remove('hidden');
+    }
+
+    function closeStoryModal() {
+      document.getElementById('story-modal').classList.add('hidden');
+    }
+
+
+    /* ================= TALK TO GRANDMA INTERACTIVE CHAT ================= */
+    let chatHistory = [];
+
+    function initGrandmaChat() {
+      const chatContainer = document.getElementById('chat-messages');
+      chatContainer.innerHTML = '';
+      chatHistory = [];
+
+      // Grandma initial welcome message tailored to assessment
+      let initialMsg = `Hello my dear ${studentData.name}! Grandma is sitting right here by the warm hearth. `;
+      if (studentData.optionalNote) {
+        initialMsg += `I read your note about what's bothering your heart. I hear you loud and clear, and we will take it step by step. What would you like to share or ask me right now?`;
+      } else {
+        initialMsg += `I have your warm tea ready. Tell me, what's weighing on your heart or mind today?`;
+      }
+
+      addChatMessage('grandma', initialMsg);
+    }
+
+    function addChatMessage(sender, text) {
+      const chatContainer = document.getElementById('chat-messages');
+      const msgDiv = document.createElement('div');
+      msgDiv.className = `flex gap-3 max-w-[85%] ${sender === 'user' ? 'ml-auto flex-row-reverse' : ''} fade-in`;
+
+      if (sender === 'grandma') {
+        msgDiv.innerHTML = `
+          <div class="w-8 h-8 rounded-full bg-terracotta/20 flex-shrink-0 flex items-center justify-center font-serif font-bold text-warmWood text-xs border border-terracotta/30">
+            GC
+          </div>
+          <div class="bg-creamyDark/80 border border-warmSand p-3.5 rounded-2xl rounded-tl-none text-xs sm:text-sm text-warmWood leading-relaxed shadow-sm">
+            ${text}
+          </div>
+        `;
+      } else {
+        msgDiv.innerHTML = `
+          <div class="w-8 h-8 rounded-full bg-sage text-white flex-shrink-0 flex items-center justify-center font-bold text-xs shadow-sm">
+            ${studentData.name ? studentData.name.charAt(0).toUpperCase() : 'U'}
+          </div>
+          <div class="bg-terracotta text-white p-3.5 rounded-2xl rounded-tr-none text-xs sm:text-sm leading-relaxed shadow-md">
+            ${text}
+          </div>
+        `;
+      }
+
+      chatContainer.appendChild(msgDiv);
+      chatContainer.scrollTop = chatContainer.scrollHeight;
+    }
+
+    function handleChatSubmit(e) {
+      e.preventDefault();
+      const input = document.getElementById('chat-input');
+      const text = input.value.trim();
+      if (!text) return;
+
+      addChatMessage('user', text);
+      input.value = '';
+
+      // Generate Grandma Response Simulation
+      setTimeout(() => {
+        const grandmaReply = generateGrandmaReply(text);
+        addChatMessage('grandma', grandmaReply);
+      }, 700);
+    }
+
+    function sendQuickPrompt(promptText) {
+      addChatMessage('user', promptText);
+      setTimeout(() => {
+        const grandmaReply = generateGrandmaReply(promptText);
+        addChatMessage('grandma', grandmaReply);
+      }, 700);
+    }
+
+    function generateGrandmaReply(userInput) {
+      const inputLower = userInput.toLowerCase();
+      
+      if (inputLower.includes('overwhelmed') || inputLower.includes('stress') || inputLower.includes('too much')) {
+        return `Oh, my dear ${studentData.name}... when the waves feel too tall, don't try to swim across the whole ocean at once. Put down your heavy books for 20 minutes. Drink a full glass of water, step outside to feel the cool breeze, and remember: you don't have to conquer all of tomorrow today.`;
+      } else if (inputLower.includes('fail') || inputLower.includes('fear') || inputLower.includes('scared')) {
+        return `Listen to Grandma: failure is not a wall that stops you; it is just a signpost telling you to try a slightly different path. In my long life, every big mistake I made taught me ten times more than my quiet successes ever did. Your worth is not tied to a test score.`;
+      } else if (inputLower.includes('focus') || inputLower.includes('procrastinat')) {
+        return `Focus is like a small bird, ${studentData.name}—if you try to grab it tightly with force, it flies away. Try setting a timer for just 10 little minutes. Tell your mind: 'We only work for 10 minutes, then we rest.' Once you start gently, the bird usually lands right on your shoulder.`;
+      } else if (inputLower.includes('story') || inputLower.includes('adventure')) {
+        return `Ah, that reminds me of when I was stranded during a snowstorm in a tiny cabin in Northern Norway! We had very little firewood left, so we had to burn only one log every two hours. It taught me that when resources or energy are tight, you conserve and treasure every small ember. Don't burn all your energy in one hour, dear!`;
+      } else {
+        return `Grandma hears you loud and warm, dear ${studentData.name}. Life can present us with strange riddles, but as long as you treat yourself with kindness, stay curious, and take one gentle step at a time, you will find your footing. Tell me more about what you're planning to do next!`;
+      }
+    }
+
+    function clearChatHistory() {
+      initGrandmaChat();
+    }
+
+    /* PULL NEW WISDOM LEAF */
+    function pullNewWisdom() {
+      const randomQuote = wisdomQuotes[Math.floor(Math.random() * wisdomQuotes.length)];
+      const wisdomEl = document.getElementById('wisdom-text');
+      wisdomEl.style.opacity = '0';
+      setTimeout(() => {
+        wisdomEl.innerText = `"${randomQuote}"`;
+        wisdomEl.style.opacity = '1';
+      }, 200);
+    }
+
+    /* TEA BREATHING RITUAL TIMER */
+    let breathingInterval = null;
+    function startTeaBreathing() {
+      const display = document.getElementById('tea-timer-display');
+      const btn = document.getElementById('btn-tea-timer');
+      
+      display.classList.remove('hidden');
+      btn.disabled = true;
+      btn.classList.add('opacity-50');
+
+      let phases = [
+        { text: "Inhale warm tea vapor... 4s", duration: 4 },
+        { text: "Hold the soothing warmth inside... 4s", duration: 4 },
+        { text: "Blow gently to cool your tea... 6s", duration: 6 }
+      ];
+
+      let stepIndex = 0;
+      let count = phases[0].duration;
+
+      display.innerText = `${phases[0].text} (${count})`;
+
+      if (breathingInterval) clearInterval(breathingInterval);
+
+      breathingInterval = setInterval(() => {
+        count--;
+        if (count > 0) {
+          display.innerText = `${phases[stepIndex].text} (${count})`;
+        } else {
+          stepIndex++;
+          if (stepIndex < phases.length) {
+            count = phases[stepIndex].duration;
+            display.innerText = `${phases[stepIndex].text} (${count})`;
+          } else {
+            clearInterval(breathingInterval);
+            display.innerText = "✨ Breath complete. Feel the warm peace inside.";
+            btn.disabled = false;
+            btn.classList.remove('opacity-50');
+          }
+        }
+      }, 1000);
+    }
+  </script>
+</body>
+</html>
